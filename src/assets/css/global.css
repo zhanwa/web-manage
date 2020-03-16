@@ -1,0 +1,17 @@
+html,
+body,
+#app {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.flex-c {
+    display: flex;
+    flex-direction: column;
+}
+
+.flex-r {
+    display: flex;
+    flex-direction: row;
+}
