@@ -3,8 +3,16 @@ import VueRouter from 'vue-router'
 import Login from '../page/login.vue'
 import MeetingList from '../page/meeting_list.vue'
 import Home from '../page/home.vue'
-import Sign from '../components/sign.vue'
-
+import Sign from '../components/sign/sign.vue'
+import SignList from '../components/sign/sign_list.vue'
+import InteractiveWall from '../page/barrage-landscape.vue'
+import Lotterty from '../components/lottery/lottery.vue'
+import LottertyLandscan from '../page/lottery-landscan.vue'
+import VoteList from '../components/vote/vote_list'
+import VoteAccount from '../components/vote/vote_account'
+import VoteLandscan from '../page/vote-landscan.vue'
+import SignLandscan from '../page/sign-landscan.vue'
+import File from '../components/file/file.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -23,13 +31,54 @@ const routes = [
     component: MeetingList
   },
   {
-    path: '/home',
+    path: '/interactive_wall',
+    name: 'interactive_wall',
+    component: InteractiveWall
+  },
+  {
+    path: '/lottery_wall',
+    name: 'lottery_wall',
+    component: LottertyLandscan
+  },
+  {
+    path: '/sign_wall',
+    name: 'sign_wall',
+    component: SignLandscan
+  },
+  {
+    path: '/vote_wall',
+    name: 'vote_wall',
+    component: VoteLandscan
+  },
+  {
+    // 匹配动态id
+    path: '/home/:id',
     name: 'home',
     component: Home,
     children: [
       {
         path: '/sign',
         component: Sign
+      },
+      {
+        path: '/sign_list',
+        component: SignList
+      },
+      {
+        path: '/lottery',
+        component: Lotterty
+      },
+      {
+        path: '/vote_list',
+        component: VoteList
+      },
+      {
+        path: '/vote_account',
+        component: VoteAccount
+      },
+      {
+        path: '/file',
+        component: File
       }
     ]
   }

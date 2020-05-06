@@ -10,6 +10,7 @@
         <h2>会议实时互动管理系统</h2>
       </div>
       <el-button type="info" @click="loginout">后退</el-button>
+      <el-button type="info" @click="startwall()">互动墙</el-button>
     </el-header>
     <!-- 主体区域 -->
     <el-container>
@@ -74,48 +75,73 @@ export default {
       listMenuLists: [
         {
           id: 1,
-          authName: '签到管理',
+          authName: '人员管理',
           path: 'null',
           children: [
             {
               id: 1,
-              authName: '签到列表',
+              authName: '报名列表',
               path: 'sign'
+            },
+            {
+              id: 2,
+              authName: '签到列表',
+              path: 'sign_list'
             }
           ]
         },
         {
           id: 2,
-          authName: '权限管理',
+          authName: '抽奖管理',
           path: 'null',
           children: [
             {
               id: 1,
-              authName: '权限列表',
-              path: 'pri'
+              authName: '抽奖',
+              path: 'lottery'
+            },
+            {
+              id: 2,
+              authName: '中奖人员',
+              path: 'lotteryWinning'
             }
           ]
         },
         {
           id: 3,
-          authName: '商品管理',
+          authName: '投票管理',
           path: 'null',
           children: [
             {
               id: 1,
-              authName: '商品列表',
-              path: 'goods'
+              authName: '投票列表',
+              path: 'vote_list'
+            },
+            {
+              id: 2,
+              authName: '统计列表',
+              path: 'vote_account'
             }
           ]
         },
         {
           id: 4,
-          authName: '订单管理',
+          authName: '文件管理',
           path: 'null',
           children: [
             {
               id: 1,
-              authName: '订单列表',
+              authName: '文件列表',
+              path: 'file'
+            },
+            {
+              id: 2,
+              authName: '图片列表',
+              path: 'others'
+            },
+            {
+              id: 3,
+              authName: '文档列表',
               path: 'others'
             }
           ]
@@ -161,11 +187,18 @@ export default {
     async getMenuList() {
       const mid = window.sessionStorage.getItem('mid')
       const { data: res } = await this.$http.get('meetingapi/v1/getmeeting/', {
-        params: { m_id: mid }
+        params: {
+          mid: mid,
+          type: 'getmeetingdetail'
+        }
       })
       console.log(res)
       if (res.msg !== 'ok') return this.$message.errror(res.meta.msg)
       this.meeting_detail = res.data
+    },
+    // 开启互动墙
+    startwall() {
+      this.$router.push('./interactive_wall')
     }
   }
 }

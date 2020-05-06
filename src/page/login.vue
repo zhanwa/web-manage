@@ -4,6 +4,7 @@
       <!-- 放置二维码的容器,需要给一个ref -->
       <div id="qrcode" ref="qrcode"></div>
     </div>
+    <!-- <img :src="img_path" alt="" /> -->
   </div>
 </template>
 
@@ -13,6 +14,7 @@ import Url from '../unit/serve.config'
 export default {
   data() {
     return {
+      // img_path: require('../assets/logo.png'),
       path: Url.wsLogin,
       socket: '',
       innerVisible: false,
@@ -86,9 +88,11 @@ export default {
     }
   },
   mounted() {
+    // this.$socket.send(JSON.stringify('some data'))
+    console.log(this)
     this.init()
   },
-  destroyed() {
+  beforeDestroy() {
     // 销毁监听
     this.socket.close()
   }

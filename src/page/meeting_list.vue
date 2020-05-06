@@ -39,7 +39,7 @@ export default {
     into(mid) {
       console.log('good')
       window.sessionStorage.setItem('mid', mid)
-      this.$router.push('./home')
+      this.$router.push('./home/' + mid)
     }
   }
 }
