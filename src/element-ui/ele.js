@@ -29,10 +29,19 @@ import {
   MessageBox,
   Popover,
   Upload,
-  Popconfirm
+  Popconfirm,
+  Tabs,
+  TabPane,
+  Rate,
+  Timeline,
+  TimelineItem
 } from 'element-ui'
 Vue.use(Button)
-
+  .use(Timeline)
+  .use(TimelineItem)
+  .use(Tabs)
+  .use(Rate)
+  .use(TabPane)
   .use(Row)
   .use(Popconfirm)
   .use(Upload)

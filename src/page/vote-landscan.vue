@@ -85,34 +85,37 @@ export default {
     onmessage() {
       this.$options.sockets.onmessage = data => {
         console.log('我在监听')
-        this.rt_data = JSON.parse(data.data).contant
-        for (const key in this.rt_data) {
-          //  substr 方法用于返回一个从指定位置开始的指定长度的子字符串。
-          const keys = key.substr(2)
-          console.log(keys)
-          if (this.vote_id === keys) {
-            // eslint-disable-next-line camelcase
-            const option_id = this.rt_data[key] // 选项序号
-            console.log(option_id)
-            if (this.votelist) {
-              console.log('votelist:' + this.votelist)
-              this.votelist.forEach(el => {
-                // eslint-disable-next-line camelcase
-                if (el.name === option_id) {
-                  el.value = parseInt(el.value) + 1
-                }
-              })
-              this.drawPie('main')
-            } else {
-              if (this.tem) {
-                this.tem[option_id] += 1
+        const d = JSON.parse(data.data)
+        if (d.type === 'vote') {
+          this.rt_data = d.contant
+          for (const key in this.rt_data) {
+            //  substr 方法用于返回一个从指定位置开始的指定长度的子字符串。
+            const keys = key.substr(2)
+            console.log(keys)
+            if (this.vote_id === keys) {
+              // eslint-disable-next-line camelcase
+              const option_id = this.rt_data[key] // 选项序号
+              console.log(option_id)
+              if (this.votelist) {
+                console.log('votelist:' + this.votelist)
+                this.votelist.forEach(el => {
+                  // eslint-disable-next-line camelcase
+                  if (el.name === option_id) {
+                    el.value = parseInt(el.value) + 1
+                  }
+                })
+                this.drawPie('main')
               } else {
-                this.tem[option_id] = 1
+                if (this.tem) {
+                  this.tem[option_id] += 1
+                } else {
+                  this.tem[option_id] = 1
+                }
               }
             }
           }
+          console.log(this.tem)
         }
-        console.log(this.tem)
       }
     },
     // 改变对象的key
@@ -151,6 +154,7 @@ export default {
       })
     },
     init() {
+      // 获取投票列表
       this.$http
         .get(Url.get_voteList, {
           params: {

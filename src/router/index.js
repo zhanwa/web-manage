@@ -13,6 +13,12 @@ import VoteAccount from '../components/vote/vote_account'
 import VoteLandscan from '../page/vote-landscan.vue'
 import SignLandscan from '../page/sign-landscan.vue'
 import File from '../components/file/file.vue'
+import Webrtc from '../page/webrtc-room.vue'
+import MeetingMessage from '../components/meeting_message/meeting_message.vue'
+import Comment from '../components/meeting_message/comment.vue'
+import Announce from '../components/meeting_message/announce.vue'
+import LottertyZhong from '../components/lottery/lottery_zhong'
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -51,6 +57,11 @@ const routes = [
     component: VoteLandscan
   },
   {
+    path: '/webrtc-room',
+    name: 'webrtc-room',
+    component: Webrtc
+  },
+  {
     // 匹配动态id
     path: '/home/:id',
     name: 'home',
@@ -69,6 +80,10 @@ const routes = [
         component: Lotterty
       },
       {
+        path: '/lottery_zhong',
+        component: LottertyZhong
+      },
+      {
         path: '/vote_list',
         component: VoteList
       },
@@ -79,6 +94,18 @@ const routes = [
       {
         path: '/file',
         component: File
+      },
+      {
+        path: '/meeting_message',
+        component: MeetingMessage
+      },
+      {
+        path: '/comment',
+        component: Comment
+      },
+      {
+        path: '/announce',
+        component: Announce
       }
     ]
   }
@@ -105,4 +132,8 @@ router.beforeEach((to, from, next) => {
   if (!tokened) return next('/login')
   next()
 })
+// const routerReplace = VueRouter.prototype.replace
+// VueRouter.prototype.push = function push(location) {
+//   return routerReplace.call(this, location).catch(error => error)
+// }
 export default router

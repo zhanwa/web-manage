@@ -24,6 +24,7 @@ Vue.use(VueNativeSock, 'ws://192.168.2.104:8000/userapi/wss/', {
 Vue.use(vueBaberrage)
 
 axios.defaults.baseURL = 'http://127.0.0.1:8000/'
+Vue.prototype.$baseurl = 'http://127.0.0.1:8000/'
 // 配置请求拦截器，将token加到请求头以有权限访问一些api
 axios.interceptors.request.use(config => {
   config.headers['Content-Type'] = 'application/json'

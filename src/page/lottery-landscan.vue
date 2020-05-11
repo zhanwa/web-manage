@@ -111,7 +111,6 @@ export default {
           disabled: false
         }
       ], // 单次抽取选项
-      request: null, // indexDB对象
       awardOptions: [], // 奖项
       userData: [], // 总用户集合
       rollIdArr: [], // 当前抽中集合,
@@ -132,9 +131,6 @@ export default {
     // 取得抽奖总列表
 
     this.awardOptions = this.$route.query.lotteryList
-    this.awardOptions.map(el => {
-      el.award_member = 10
-    })
     console.log(this.awardOptions)
     // 如果是签到抽奖,可以加载时获取签到信息(暂未设计)
     // this.getData(this.storeName.user, this.userData)
@@ -239,6 +235,7 @@ export default {
       // 3.4重置开关
       this.isBegin = false
       console.log(this.rollIdArr)
+      this.send_word()
     },
     // 4.滚动主要函数
     roll() {
@@ -303,6 +300,19 @@ export default {
           item.disabled = false
         }
       })
+    },
+    // 9.1中奖信息提交后端
+    send_word() {
+      const that = this
+      this.$http
+        .post(that.$url.get_lotteryList, {
+          type: 'zhong',
+          lid: that.award_id,
+          llist: that.rollIdArr
+        })
+        .then(res => {
+          console.log(res)
+        })
     }
   },
   watch: {
@@ -341,6 +351,7 @@ export default {
 <style lang="less" scoped>
 @baseColor: rgba(227, 183, 27, 0.9);
 .lottery-container {
+  background: url(https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1588947114550&di=a7ca5c93d51b9ddce93416b7fb559ebe&imgtype=0&src=http%3A%2F%2Fsrc.onlinedown.net%2Fd%2Ffile%2Fuser_p%2Fpic%2F2017-10-28%2F8fa92801c82765cf5bedeab692365f1d.jpg);
   height: 100%;
   overflow: hidden;
   position: relative;

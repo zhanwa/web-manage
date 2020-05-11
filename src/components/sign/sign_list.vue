@@ -42,14 +42,13 @@
         <el-table-column
           label="电话"
           width="120"
-          prop="phone"
+          prop="label2"
         ></el-table-column>
         <el-table-column label="签到状态" width="120">
           <!-- scope.row包含这一行的数据 -->
           <template slot-scope="scope">
             <el-switch
               v-model="scope.row.sign"
-              :disabled="scope.row.sign"
               active-color="#13ce66"
               inactive-color="#ff4949"
             ></el-switch>

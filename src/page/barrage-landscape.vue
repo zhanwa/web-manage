@@ -1,5 +1,6 @@
 <template>
-  <div id="wall">
+  <div id="wall" style="height:100vh">
+    <el-button class="switch" @click="open">打开弹幕</el-button>
     <div class="danmu">
       <vue-baberrage
         :isShow="barrageIsShow"
@@ -8,6 +9,7 @@
       >
       </vue-baberrage>
     </div>
+    <iframe :src="doc" frameborder="0" width="100%" height="100%"></iframe>
   </div>
 </template>
 
@@ -19,7 +21,7 @@ export default {
   data() {
     return {
       // 弹幕是否展示
-      barrageIsShow: true,
+      barrageIsShow: false,
       currentId: 0,
       // 弹幕是否循环
       barrageLoop: false,
@@ -27,10 +29,16 @@ export default {
       barrageList: [],
       type: MESSAGE_TYPE.NORMAL,
       // 保存socket
-      socket: ''
+      socket: '',
+      // 文件路径
+      doc: ''
     }
   },
   methods: {
+    // 打开弹幕
+    open() {
+      this.barrageIsShow = true
+    },
     __init() {
       console.log(Url.wsdanmu)
       this.__initWebSocket()
@@ -60,8 +68,17 @@ export default {
       this.socket.close()
     }
   },
+  created() {
+    const file = this.$route.query.file
+    console.log(file)
+    this.doc = 'http://192.168.2.104:8000/' + file.Dnewpath
+    console.log(this.doc)
+  },
   mounted() {
-    this.__init()
+    console.log('haha')
+    this.$nextTick(() => {
+      this.__init()
+    })
   },
   beforeDestroy() {
     this.socket.close()
@@ -69,4 +86,10 @@ export default {
 }
 </script>
 
-<style lang="less" scoped></style>
+<style lang="less" scoped>
+.switch {
+  position: absolute;
+  left: 0;
+  top: 20px;
+}
+</style>

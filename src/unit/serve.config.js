@@ -11,6 +11,7 @@ const Url = {
   get_lotteryList: baseUrl + 'meetingapi/v1/lottery/', // 获取奖品列表
   get_voteList: baseUrl + 'meetingapi/v1/vote/', // 获取投票列表
   get_fileList: baseUrl + 'meetingapi/v1/file/', // 获取文件列表
+  comment: baseUrl + 'meetingapi/v1/announce/', // 处理公告
   global_wss: wsBaseurl + 'userapi/wss/'
 }
 export default Url

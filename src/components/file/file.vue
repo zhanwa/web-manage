@@ -29,13 +29,13 @@
       <!-- 列表 ：data绑定数据源  prop从数据源中取值-->
       <el-table stripe border style="width: 100%" :data="file_list_prepare">
         <el-table-column type="index">
-          <template slot-scope="scope">
+          <!-- <template slot-scope="scope">
             <img
               :src="'http://192.168.2.104:8000/' + scope.row.image"
               min-width="40"
               height="40"
             />
-          </template>
+          </template> -->
         </el-table-column>
         <el-table-column align="center" label="文件名" width="300" prop="Dname">
           <!-- 图片的显示 -->
@@ -64,12 +64,9 @@
         <el-table-column label="操作" width="180">
           <template slot-scope="scope">
             <!-- 修改按钮 -->
-            <el-button
-              type="primary"
-              icon="el-icon-edit"
-              circle
-              size="mini"
-            ></el-button>
+            <el-button type="primary" size="mini" @click="open(scope.row)"
+              >打开</el-button
+            >
             <!-- 删除按钮 -->
             <el-button
               type="danger"
@@ -130,6 +127,14 @@ export default {
       .catch()
   },
   methods: {
+    // 打开文件
+    open(e) {
+      // this.$router.push({ path: './barrage-landscape.vue', query: { file: e } })
+      this.$router.push({
+        path: './interactive_wall',
+        query: { file: e }
+      })
+    },
     //   上传成功
     upsuccess(respond) {
       console.log(respond)

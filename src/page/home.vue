@@ -103,7 +103,7 @@ export default {
             {
               id: 2,
               authName: '中奖人员',
-              path: 'lotteryWinning'
+              path: 'lottery_zhong'
             }
           ]
         },
@@ -119,7 +119,7 @@ export default {
             },
             {
               id: 2,
-              authName: '统计列表',
+              authName: '结果统计',
               path: 'vote_account'
             }
           ]
@@ -131,30 +131,35 @@ export default {
           children: [
             {
               id: 1,
-              authName: '文件列表',
+              authName: '管理员上传文件',
               path: 'file'
             },
             {
               id: 2,
-              authName: '图片列表',
-              path: 'others'
-            },
-            {
-              id: 3,
-              authName: '文档列表',
+              authName: '用户上传文件',
               path: 'others'
             }
           ]
         },
         {
           id: 5,
-          authName: '数据统计',
+          authName: '会议数据',
           path: 'null',
           children: [
             {
               id: 1,
-              authName: '数据列表',
-              path: 'db'
+              authName: '会议信息',
+              path: 'meeting_message'
+            },
+            {
+              id: 2,
+              authName: '评论评分',
+              path: 'comment'
+            },
+            {
+              id: 3,
+              authName: '会议公告',
+              path: 'announce'
             }
           ]
         }
@@ -199,6 +204,10 @@ export default {
     // 开启互动墙
     startwall() {
       this.$router.push('./interactive_wall')
+    },
+    // 前往直播页面
+    towebrtc() {
+      this.$router.push('./webrtc-room')
     }
   }
 }

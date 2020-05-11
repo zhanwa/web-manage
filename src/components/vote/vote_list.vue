@@ -40,11 +40,6 @@
           prop="question"
         ></el-table-column>
         <el-table-column
-          label="数量"
-          width="120"
-          prop="number"
-        ></el-table-column>
-        <el-table-column
           label="发起时间"
           width="180"
           prop="time"
@@ -74,7 +69,7 @@
     </el-card>
     <!-- 修改数据对话框 -->
     <el-dialog
-      title="增加抽奖"
+      title="增加投票"
       :visible.sync="addDialogVisible"
       width="50%"
       center
@@ -88,23 +83,11 @@
           :rules="addFormRules"
           ref="editForRef"
         >
-          <el-form-item label="等级" prop="leval">
-            <el-select v-model="addForm.leval" placeholder="请选择奖品等级">
-              <el-option label="特等奖" value="特等奖"></el-option>
-              <el-option label="一等奖" value="一等奖"></el-option>
-              <el-option label="二等奖" value="二等奖"></el-option>
-              <el-option label="三等奖" value="三等奖"></el-option>
-              <el-option label="参与奖" value="参与奖"></el-option>
-            </el-select>
-          </el-form-item>
-          <el-form-item label="数量" prop="number">
+          <el-form-item label="题目" prop="number">
             <el-input v-model.number="addForm.number"></el-input>
           </el-form-item>
-          <el-form-item label="奖品" prop="goods">
+          <el-form-item label="选项" prop="goods">
             <el-input v-model="addForm.goods"></el-input>
-          </el-form-item>
-          <el-form-item label="人数" prop="limit">
-            <el-input v-model.number="addForm.limit"></el-input>
           </el-form-item>
         </el-form>
       </span>
